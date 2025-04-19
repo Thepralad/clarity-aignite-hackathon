@@ -29,3 +29,10 @@ type SummarizedArticle struct {
 	Content         []string `json:"content"`
 	RelatedSearches []string `json:"relatedsearch"`
 }
+
+type Article struct {
+	ID       int    `json:"id"`
+	Title    string `json:"title"`
+	ImgURL   string `json:"img_url"`
+	Category string `json:"category"`
+}

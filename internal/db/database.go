@@ -4,9 +4,9 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
-	"os"
 	"time"
 
+	"github.com/Thepralad/clarity-aignite-hackathon/internal/models"
 	_ "github.com/go-sql-driver/mysql"
 )
 
@@ -17,15 +17,10 @@ var DB *sql.DB
 func Init() error {
 	// Fetch config from environment variables
 	user := "avnadmin"
-	pass := os.Getenv("DB_PASS")
+	pass := "AVNS_VOIW0Kt3BqMBMTCfwNr"
 	host := "mysql-195ced1-thepralad6-5410.j.aivencloud.com"
 	port := "18009"
 	name := "defaultdb"
-
-	// Fallbacks or panic if not set (optional safety)
-	if user == "" || pass == "" || host == "" || port == "" || name == "" {
-		return fmt.Errorf("database config not fully set in environment variables")
-	}
 
 	// Build DSN
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true", user, pass, host, port, name)
@@ -48,4 +43,27 @@ func Init() error {
 
 	log.Println("✅ Connected to MySQL database successfully")
 	return nil
+}
+
+func GetArticles() ([]models.Article, error) {
+	rows, err := DB.Query("SELECT id, title, img_url, category FROM articles")
+	if err != nil {
+		return nil, fmt.Errorf("failed to query articles: %w", err)
+	}
+	defer rows.Close()
+
+	var articles []models.Article
+	for rows.Next() {
+		var article models.Article
+		if err := rows.Scan(&article.ID, &article.Title, &article.ImgURL, &article.Category); err != nil {
+			return nil, fmt.Errorf("failed to scan article: %w", err)
+		}
+		articles = append(articles, article)
+	}
+
+	if err := rows.Err(); err != nil {
+		return nil, fmt.Errorf("error iterating over rows: %w", err)
+	}
+
+	return articles, nil
 }
