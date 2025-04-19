@@ -2,9 +2,13 @@ module github.com/Thepralad/clarity-aignite-hackathon
 
 go 1.23.4
 
-require github.com/gocolly/colly/v2 v2.2.0
+require (
+	github.com/go-sql-driver/mysql v1.9.2
+	github.com/gocolly/colly/v2 v2.2.0
+)
 
 require (
+	filippo.io/edwards25519 v1.1.0 // indirect
 	github.com/PuerkitoBio/goquery v1.10.2 // indirect
 	github.com/andybalholm/cascadia v1.3.3 // indirect
 	github.com/antchfx/htmlquery v1.3.4 // indirect
