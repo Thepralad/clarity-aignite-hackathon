@@ -11,6 +11,10 @@ import (
 
 func HandlerSearch(res http.ResponseWriter, req *http.Request) {
 
+	res.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
+	res.Header().Set("Access-Control-Allow-Methods", "GET, OPTIONS")
+	res.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+
 	if req.Method != http.MethodGet {
 		http.Error(res, "Method not allowed", http.StatusMethodNotAllowed)
 		return
