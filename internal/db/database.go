@@ -14,16 +14,7 @@ import (
 var DB *sql.DB
 
 // Init initializes the MySQL database connection
-func Init() error {
-	// Fetch config from environment variables
-	user := "avnadmin"
-	pass := "AVNS_VOIW0Kt3BqMBMTCfwNr"
-	host := "mysql-195ced1-thepralad6-5410.j.aivencloud.com"
-	port := "18009"
-	name := "defaultdb"
-
-	// Build DSN
-	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true", user, pass, host, port, name)
+func Init(dsn string) error {
 
 	var err error
 	DB, err = sql.Open("mysql", dsn)

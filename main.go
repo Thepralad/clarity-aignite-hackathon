@@ -2,15 +2,31 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
+	"os"
 
 	"github.com/Thepralad/clarity-aignite-hackathon/internal/api"
 	"github.com/Thepralad/clarity-aignite-hackathon/internal/db"
+	"github.com/joho/godotenv"
 )
 
 func main() {
+	if err := godotenv.Load(); err != nil {
+		log.Println("⚠️  Warning: No .env file found, using system environment variables")
+	}
+
+	// Fetch config from environment variables
+	user := os.Getenv("DB_USER")
+	pass := os.Getenv("DB_PASS")
+	host := os.Getenv("DB_HOST")
+	port := os.Getenv("DB_PORT")
+	name := os.Getenv("DB_NAME")
+
+	// Build DSN
+	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true", user, pass, host, port, name)
 	// Initialize the database connection
-	err := db.Init()
+	err := db.Init(dsn)
 	if err != nil {
 		fmt.Printf("Database initialization error: %s\n", err)
 		return
