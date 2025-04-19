@@ -1,0 +1,25 @@
+package models
+
+type NewsResponse struct {
+	SearchParameters struct {
+		Query  string `json:"q"`
+		Type   string `json:"type"`
+		Engine string `json:"engine"`
+	} `json:"searchParameters"`
+	News []NewsItem `json:"news"`
+}
+
+type NewsItem struct {
+	Title    string `json:"title"`
+	Link     string `json:"link"`
+	Snippet  string `json:"snippet"`
+	Date     string `json:"date"`
+	Source   string `json:"source"`
+	Position int    `json:"position"`
+}
+
+type ScrapedArticle struct {
+	URL     string   `json:"url"`
+	Title   string   `json:"title"`
+	Content []string `json:"content"`
+}
