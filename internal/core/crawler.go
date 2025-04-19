@@ -54,11 +54,12 @@ func ExtractUrls(res models.NewsResponse) []string {
 	for _, newsItem := range res.News {
 		// Add the Link (URL) to our urls slice
 		if newsItem.Link != "" {
+
 			urls = append(urls, newsItem.Link)
 		}
 	}
 
-	return urls[0:5]
+	return urls[:5]
 }
 
 func ScrapeUrls(urls []string) []models.ScrapedArticle {

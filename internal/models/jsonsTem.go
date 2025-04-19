@@ -23,3 +23,9 @@ type ScrapedArticle struct {
 	Title   string   `json:"title"`
 	Content []string `json:"content"`
 }
+
+type SummarizedArticle struct {
+	Title           string   `json:"title"`
+	Content         []string `json:"content"`
+	RelatedSearches []string `json:"relatedsearch"`
+}
