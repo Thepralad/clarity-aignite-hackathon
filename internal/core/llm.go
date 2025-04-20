@@ -37,7 +37,7 @@ type Response struct {
 
 func Summarize(query string, scrapedArticles *[]models.ScrapedArticle) (*models.SummarizedArticle, error) {
 	// Start with the instruction part of the prompt
-	prompt := "Summarize all the content below, which are the different articles of the news, remove any biases, fact check in just 10-100 words and just be on point(use simple english), generate a succinct title and content for now. and generate in a json format like this title, array of strings(content, to denote paragraph,) and relatedsearch. and only use 2 para if needed, or use only one. And answer this query(as a para in the content field) \n\n" + query
+	prompt := "Summarize all the content below in simple english, which are the different articles of the news, remove any biases, fact check in just 10-100 words and just be on point(use simple english), generate a succinct title and content for now. and generate in a json format like this title, array of strings(para) and array of strings(points (if a the query is like in numerical format like 'top 10 news', 'top 5 topics', 'top 10 headlines') give exactly the number of points the user wants) and relatedsearch. . And answer this query(as a para in the content field) \n\n" + query
 
 	// Append each article's content to the prompt
 	for i, article := range *scrapedArticles {

@@ -26,7 +26,9 @@ type ScrapedArticle struct {
 
 type SummarizedArticle struct {
 	Title           string   `json:"title"`
-	Content         []string `json:"content"`
+	Para            []string `json:"para"`
+	Points          []string `json:"points"`
+	SourcesURL      []string `json:"sources_url"`
 	RelatedSearches []string `json:"relatedsearch"`
 }
 

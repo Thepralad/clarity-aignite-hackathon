@@ -36,6 +36,9 @@ func HandlerSearch(res http.ResponseWriter, req *http.Request) {
 		return
 	}
 
+	// Append extracted URLs to the SourcesURL field
+	summary.SourcesURL = append(summary.SourcesURL, urls...)
+
 	// Convert the summary to JSON
 	summaryJSON, err := json.Marshal(summary)
 	if err != nil {
